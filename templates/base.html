@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Captain America: Shield Defense{% endblock %}</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header class="game-header">
+        <h1 class="game-title">🛡️ CAPTAIN AMERICA</h1>
+        <p class="game-subtitle">The Last Stand</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="{% url 'game' %}">Game</a>
+        <a href="{% url 'leaderboard' %}">Leaderboard</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message message-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">
+        <p>&copy; 2025 Captain America: The Last Stand | Built with Django</p>
+    </footer>
+
+    <script src="{% static 'js/game.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

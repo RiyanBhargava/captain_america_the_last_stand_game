@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - Captain America: Shield Defense{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div class="auth-container" style="max-width: 600px;">
+        <h2 class="auth-title">🛡️ AGENT PROFILE</h2>
+        
+        <div style="text-align: center; margin-bottom: 2rem;">
+            {% if user.avatar_url %}
+                <img src="{{ user.avatar_url }}" alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+            {% endif %}
+            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+            <p>@{{ user.username }}</p>
+        </div>
+        
+        <div class="game-stats">
+            <div class="stat-item">
+                <div class="stat-label">Total Score</div>
+                <div class="stat-value">{{ user.total_score }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Best Score</div>
+                <div class="stat-value">{{ user.best_score }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Games Played</div>
+                <div class="stat-value">{{ user.games_played }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Games Won</div>
+                <div class="stat-value">{{ user.games_won }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value">{{ user.win_rate|floatformat:1 }}%</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="{% url 'game' %}" class="btn">Play Game</a>
+            <a href="{% url 'leaderboard' %}" class="btn secondary">Leaderboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

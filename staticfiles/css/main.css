@@ -1,0 +1,488 @@
+/* Captain America Shield Defense - Main Styles */
+
+:root {
+    --cap-red: #da020e;
+    --cap-blue: #003f88;
+    --cap-navy: #002244;
+    --cap-silver: #c0c0c0;
+    --cap-white: #ffffff;
+    --ultron-red: #cc0000;
+    --shield-blue: #1e90ff;
+    --shield-yellow: #ffd700;
+    --shield-red: #ff4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--cap-navy) 0%, var(--cap-blue) 100%);
+    color: var(--cap-white);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+.game-header {
+    background: linear-gradient(90deg, var(--cap-red) 0%, var(--cap-navy) 50%, var(--cap-red) 100%);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.game-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Navigation */
+.nav-menu {
+    background: rgba(0, 34, 68, 0.9);
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--cap-white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-menu a:hover {
+    background: var(--cap-red);
+}
+
+/* Game Container */
+.game-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Game Stats */
+.game-stats {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--shield-yellow);
+}
+
+/* Game Board */
+.game-board-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(15, 45px);
+    grid-template-rows: repeat(15, 45px);
+    gap: 2px;
+    background: var(--cap-navy);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.grid-cell {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.grid-cell:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.grid-cell.ultron {
+    background: var(--ultron-red);
+    background-image: url('../images/ultron.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 10px var(--ultron-red);
+    animation: ultronPulse 1s infinite;
+}
+
+.grid-cell.ultron::after {
+    content: '';
+}
+
+.grid-cell.target {
+    background: var(--cap-red) !important;
+    border: 3px solid var(--shield-yellow);
+    box-shadow: 0 0 12px var(--shield-yellow);
+}
+
+.grid-cell.target::after {
+    content: '🚪';
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.grid-cell.shield {
+    border: 2px solid #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.grid-cell.shield.blue {
+    background: var(--shield-blue);
+    background-image: url('../images/blue_shield.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.grid-cell.shield.yellow {
+    background: var(--shield-yellow);
+    background-image: url('../images/yellow_shield.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.grid-cell.shield.red {
+    background: var(--shield-red);
+    background-image: url('../images/red_shield.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Shield Controls */
+.shield-controls {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    min-width: 250px;
+}
+
+.shield-controls h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--shield-yellow);
+}
+
+.shield-type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.shield-type:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.shield-type.selected {
+    border-color: var(--shield-yellow);
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.shield-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.shield-icon.blue {
+    background-image: url('../images/blue_shield.png');
+}
+
+.shield-icon.yellow {
+    background-image: url('../images/yellow_shield.png');
+}
+
+.shield-icon.red {
+    background-image: url('../images/red_shield.png');
+}
+
+.shield-info h4 {
+    margin-bottom: 0.25rem;
+}
+
+.shield-info p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Game Controls */
+.game-controls {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    background: var(--cap-red);
+    color: var(--cap-white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+.btn:hover {
+    background: #b8001a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn.secondary {
+    background: var(--cap-blue);
+}
+
+.btn.secondary:hover {
+    background: #002a5c;
+}
+
+/* Timer and Status */
+.hostage-timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--shield-yellow);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.timer-critical {
+    color: var(--ultron-red);
+    animation: timerBlink 0.5s infinite;
+}
+
+/* Animations */
+@keyframes ultronPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes timerBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes shieldPlace {
+    0% { transform: scale(0) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+.shield-placed {
+    animation: shieldPlace 0.5s;
+}
+
+/* Game Messages */
+.game-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--cap-white);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    border: 3px solid var(--cap-red);
+}
+
+.game-message h2 {
+    color: var(--shield-yellow);
+    margin-bottom: 1rem;
+}
+
+/* Login/Register Forms */
+.auth-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--shield-yellow);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--cap-white);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--cap-white);
+    font-size: 1rem;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.google-signin {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.divider span {
+    background: var(--cap-navy);
+    padding: 0 1rem;
+}
+
+/* Leaderboard */
+.leaderboard-table {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table th {
+    background: var(--cap-red);
+    color: var(--cap-white);
+    font-weight: bold;
+}
+
+.leaderboard-table tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-board-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-board {
+        grid-template-columns: repeat(15, 35px);
+        grid-template-rows: repeat(15, 35px);
+    }
+    
+    .grid-cell {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .game-title {
+        font-size: 2rem;
+    }
+    
+    .shield-controls {
+        min-width: auto;
+        width: 100%;
+        max-width: 450px;
+    }
+}

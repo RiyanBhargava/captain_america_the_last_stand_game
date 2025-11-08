@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Captain America: Shield Defense{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-title">🛡️ AGENT LOGIN</h2>
+    
+    <!-- Manual Login Form -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%;">Login</button>
+    </form>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <p>Don't have an account? <a href="{% url 'register' %}" style="color: #ffd700;">Register here</a></p>
+    </div>
+</div>
+{% endblock %}
